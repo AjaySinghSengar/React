@@ -47,21 +47,18 @@ class App extends Component {
       cursor: 'pointer'
     };
 
-    let person = null;
+    let persons = null;
     if (this.state.showPersons) {
-      person = (
-        <div>
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'Ajay Singh')}
-            changed={this.onChangeHandler}
-          />
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-          />
-        </div>
+      persons = (
+      <div>
+        {
+          this.state.persons.map(person => {
+            return <Person
+              name={person.name}
+              age={person.name}
+            />
+          })}
+      </div>
       );
     }
 
@@ -71,19 +68,7 @@ class App extends Component {
           style={style}
           onClick={this.togglePersonsHandler}>Toggle persons</button>
 
-        {/*First Way - Output content conditionaly  */}
-        {
-          this.state.showPersons ?
-            <div>
-              <Person
-                name={this.state.persons[0].name}
-                age={this.state.persons[0].age}
-              />
-            </div>
-            : null
-        }
-        {/*Second Way - Output content conditionaly  */}
-        {person}
+        {persons}
       </div>
     );
   }
