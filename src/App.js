@@ -5,14 +5,14 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Ajay', age: 32   , id: 'qwqw' },
-      { name: 'Parul', age: 28  , id: 'qed' },
+      { name: 'Ajay', age: 32, id: 'qwqw' },
+      { name: 'Parul', age: 28, id: 'qed' },
       { name: 'Anshuman', age: 5, id: 'qewqe' }
     ],
     otherState: 'test',
     showPersons: false
   }
-  
+
   deletePersonsHandler = (personIndex) => {
     //Array is referance type in JS, directaly calling the splice on the 
     //original array is the bad idea. slice is the method which returns a copy.
@@ -20,12 +20,12 @@ class App extends Component {
     // Alternative is spred array
     const persons = [...this.state.persons];
 
-    persons.splice(personIndex,1);
+    persons.splice(personIndex, 1);
     this.setState({ persons: persons });
   }
 
   nameChangeHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(p=>{
+    const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
 
@@ -44,7 +44,7 @@ class App extends Component {
 
     persons[personIndex] = person;
 
-    this.setState({persons:persons});
+    this.setState({ persons: persons });
   }
 
   togglePersonsHandler = () => {
@@ -55,7 +55,8 @@ class App extends Component {
   render() {
     //Inline styling
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherited',
       border: '1px solid blue',
       padding: '8px',
@@ -66,20 +67,20 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {
-            this.state.persons.map((person, index) => {
-              return <Person
-                click={() => this.deletePersonsHandler(index)}
-                //Altersnative of above line
-                //click={this.deletePersonsHandler.bind(this,index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={(event) => this.nameChangeHandler(event, person.id)}
-              />
-            })}
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click={() => this.deletePersonsHandler(index)}
+              //Altersnative of above line
+              //click={this.deletePersonsHandler.bind(this,index)}
+              name={person.name}
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.nameChangeHandler(event, person.id)}
+            />
+          })}
         </div>
       );
+      style.backgroundColor = 'red';
     }
 
     return (
